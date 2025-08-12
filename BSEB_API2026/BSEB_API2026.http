@@ -1,0 +1,6 @@
+@BSEB_API2026_HostAddress = http://localhost:5034
+
+GET {{BSEB_API2026_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
