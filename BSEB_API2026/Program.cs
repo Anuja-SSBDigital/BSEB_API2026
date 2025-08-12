@@ -1,20 +1,20 @@
-using BSEB_API2026.Data;
+﻿using BSEB_API2026.Data;
 using BSEB_API2026.Middleware;
+using BSEB_API2026.Services; // ✅ Add this
 using Microsoft.EntityFrameworkCore;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
+// DbContext registration
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
-// Add services
+
+// Service registration for DI
+builder.Services.AddScoped<IDwnldRegFormService, DwnldRegFormService>(); // ✅ This fixes your error
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// DI registrations
-//builder.Services.AddScoped<IUserRepository, UserRepository>();
-//builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
