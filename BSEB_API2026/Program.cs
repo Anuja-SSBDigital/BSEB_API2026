@@ -10,7 +10,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
 
 // Service registration for DI
-builder.Services.AddScoped<IDwnldRegFormService, DwnldRegFormService>(); // ✅ This fixes your error
+builder.Services.AddScoped<IDwnldRegFormService, DwnldRegFormService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
