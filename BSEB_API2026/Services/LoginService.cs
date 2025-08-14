@@ -40,11 +40,11 @@ namespace BSEB_API2026.Services
                 var data = await _context.CollegeMaster.FromSqlRaw("EXEC sp_LoginUser @Username, @Password, @IsSuccess OUT, @Message OUT", usernameParam, passwordParam, isSuccessParam, messageParam).ToListAsync();
 
                 message = messageParam.Value?.ToString() ?? "No message";
-
                 return (data, message);
             }
             catch (Exception ex)
             {
+
                 throw new Exception("Error during login: " + ex.Message, ex);
             }
         }
