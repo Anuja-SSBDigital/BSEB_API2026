@@ -13,6 +13,7 @@ namespace BSEB_API2026.Controllers
 
         public LoginController(ILoginService loginService)
         {
+
             _LoginService = loginService;
         }
 
@@ -25,7 +26,6 @@ namespace BSEB_API2026.Controllers
                 return NotFound(new ApiResponse<List<CollegeMaster>>(message, null));
             }
 
-            // Login success
             return Ok(new ApiResponse<List<CollegeMaster>>(message, data));
         }
     }
