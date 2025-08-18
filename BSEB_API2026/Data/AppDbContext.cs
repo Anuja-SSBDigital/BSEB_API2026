@@ -9,11 +9,18 @@ namespace BSEB_API2026.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<StudentMaster> StudentMaster { get; set; }
         public DbSet<CollegeMaster> CollegeMaster { get; set; }
+        public DbSet<StudentPaymentMaster> StudentPaymentMaster { get; set; }
+
+        public DbSet<REGPaymentTransactionSummary> REGPaymentTransactionSummary { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // ✅ Mark StudentMaster as keyless for SP result mapping
             modelBuilder.Entity<StudentMaster>().HasNoKey();
             modelBuilder.Entity<CollegeMaster>().HasNoKey();
+            modelBuilder.Entity<StudentPaymentMaster>().HasNoKey();
+            modelBuilder.Entity<REGPaymentTransactionSummary>().HasNoKey();
         }
     }
 }
