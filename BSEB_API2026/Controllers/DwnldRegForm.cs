@@ -16,9 +16,10 @@ namespace BSEB_API2026.Controllers
         }
 
         [HttpGet("GetStudentData")]
-        public async Task<IActionResult> GetStudentData(int collegeId, string collegeCode, string? studentName, int facultyId)
+        public async Task<IActionResult> GetStudentData(string? collegeId, string collegeCode, string? studentName, int facultyId)
         {
             studentName = string.IsNullOrWhiteSpace(studentName) ? "" : studentName;
+            collegeId = string.IsNullOrWhiteSpace(collegeId) ? "" : collegeId;
             var result = await _DwnldRegFormService.GetStudentDataAsync(collegeId, collegeCode, studentName, facultyId);
             return Ok(result);
         }
