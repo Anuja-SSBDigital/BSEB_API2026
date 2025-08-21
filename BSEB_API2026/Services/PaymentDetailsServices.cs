@@ -27,23 +27,24 @@ namespace BSEB_API2026.Services
             
         };
 
-                var paymentdetails = await _context.REGPaymentTransactionSummary
-                    .FromSqlRaw("EXEC sp_GetStudentPaymentDetails @CollegeId, @CollegeCode, @ClientTxnId",
-                        parameters.ToArray())
-                    .ToListAsync();
 
-                var paymentModel = paymentdetails.Select(s => new REGPaymentTransactionSummary
-                {
-                    CollegeCode = s.CollegeCode,
-                    ClientTxnId = s.ClientTxnId ?? "",
-                    StudentsPerTransaction = s.StudentsPerTransaction,
-                    AmountPaid = s.AmountPaid,
-                    PaymentInitiateDate = s.PaymentInitiateDate,
-                    PaymentUpdatedDate = s.PaymentUpdatedDate,
-                    PaymentStatus = s.PaymentStatus
+                //var paymentdetails = await _context.REGPaymentTransactionSummary
+                //    .FromSqlRaw("EXEC sp_GetStudentPaymentDetails @CollegeId, @CollegeCode, @ClientTxnId",
+                //        parameters.ToArray())
+                //    .ToListAsync();
+
+                //var paymentModel = paymentdetails.Select(s => new REGPaymentTransactionSummary
+                //{
+                //    CollegeCode = s.CollegeCode,
+                //    ClientTxnId = s.ClientTxnId ?? "",
+                //    StudentsPerTransaction = s.StudentsPerTransaction,
+                //    AmountPaid = s.AmountPaid,
+                //    PaymentInitiateDate = s.PaymentInitiateDate,
+                //    PaymentUpdatedDate = s.PaymentUpdatedDate,
+                //    PaymentStatus = s.PaymentStatus
                    
 
-                }).ToList();
+                //}).ToList();
 
 
                 return paymentModel;
