@@ -7,6 +7,7 @@ namespace BSEB_API2026.Controllers
         public IActionResult Index()
         {
             return View();
+
         }
     }
 }
