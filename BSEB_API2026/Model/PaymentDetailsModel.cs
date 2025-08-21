@@ -20,6 +20,7 @@
         public int StudentsPerTransaction { get; set; }
         public string? CollegeName { get; set; }
         public string? CollegeCode { get; set; }
+
     }
 
     public class REGPaymentStudentDetail
