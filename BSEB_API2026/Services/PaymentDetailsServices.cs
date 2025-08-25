@@ -27,7 +27,6 @@ namespace BSEB_API2026.Services
             
         };
 
-
                 //var paymentdetails = await _context.REGPaymentTransactionSummary
                 //    .FromSqlRaw("EXEC sp_GetStudentPaymentDetails @CollegeId, @CollegeCode, @ClientTxnId",
                 //        parameters.ToArray())
@@ -45,7 +44,6 @@ namespace BSEB_API2026.Services
                    
 
                 //}).ToList();
-
 
                 return paymentModel;
             }
