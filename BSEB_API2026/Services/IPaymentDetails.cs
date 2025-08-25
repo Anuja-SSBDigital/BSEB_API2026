@@ -7,6 +7,7 @@ namespace BSEB_API2026.Services
     {
 
         Task<List<REGPaymentTransactionSummary>> GetREGPaymentDetails(int collegeId, string collegeCode, string ClientTxnId);
+		
 
     }
 
