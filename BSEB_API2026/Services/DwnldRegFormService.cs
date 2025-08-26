@@ -55,8 +55,6 @@ namespace BSEB_API2026.Services
             }
         }
 
-
-
         public async Task<List<StudentExtendedDTO>> GetStudentDataforPayment(int collegeId, string? collegeCode, string? studentName, int facultyId, string? subCategory)
         {
             try
