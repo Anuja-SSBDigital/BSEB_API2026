@@ -26,6 +26,7 @@ namespace BSEB_API2026.Services
             new SqlParameter("@SubCategory", "")
         };
 
+
                 var students = await _context.StudentMaster
                     .FromSqlRaw("EXEC sp_GetStudentDetails @CollegeId, @CollegeCode, @StudentName, @FacultyId, @SubCategory",
                         parameters.ToArray())
@@ -46,7 +47,6 @@ namespace BSEB_API2026.Services
    
                 }).ToList();
 
-
                 return studentDtos;
             }
             catch (Exception ex)
@@ -54,6 +54,7 @@ namespace BSEB_API2026.Services
                 throw new Exception("Error fetching student data", ex);
             }
         }
+
 
         public async Task<List<StudentExtendedDTO>> GetStudentDataforPayment(int collegeId, string? collegeCode, string? studentName, int facultyId, string? subCategory)
         {
@@ -83,8 +84,6 @@ namespace BSEB_API2026.Services
                     MotherName = s.MotherName ?? "",
                     DOB = s.DOB ?? DateTime.MinValue,
                
-               
-
                     BoardName = s.BoardName ?? "",
                     CategoryName = s.CategoryName ?? "",
 
