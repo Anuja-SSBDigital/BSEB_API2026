@@ -24,20 +24,19 @@ namespace BSEB_API2026.Controllers
             _db = db;
             _studentRegistrationService = studentRegistrationService;
         }
-          
-                 
+        
         [NonAction]
         [HttpGet("faculties")]     
-        public async Task<IActionResult> GetFaculties()  
+        public async Task<IActionResult> GetFaculties()              
         {
             var data = await _service.GetFacultiesAsync();
             return Ok(data);
         }
 
-        
+             
+
         [HttpGet("RegularStudentsRegisterList")]
 
-        //[HttpGet("Viewstudentslist")]
         public async Task<IActionResult> ViewStudentsList(
             [FromQuery] int collegeId,        
             [FromQuery] int facultyId,
@@ -47,7 +46,7 @@ namespace BSEB_API2026.Controllers
         {
             try
             {
-                // ✅ Use the correct service for student registration
+              
                 var data = await _studentRegistrationService
                     .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
 
@@ -65,8 +64,7 @@ namespace BSEB_API2026.Controllers
                 return StatusCode(500, new { message = "Internal Server Error", detail = ex.Message });
             }
         }
-         
-           
+          
         
         [NonAction]
         [HttpPost("student/{studentId}/register")]
@@ -78,6 +76,7 @@ namespace BSEB_API2026.Controllers
                 Url = $"studentregform?studentId={studentId}&categoryType={categoryType}"
             });
         }
+
 
         [NonAction]
         [HttpDelete("student/{studentId}")]
