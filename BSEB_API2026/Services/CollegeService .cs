@@ -15,9 +15,7 @@ namespace CollegeSeatAPI.Services
             _db = db;
         }
 
-        /// <summary>
-        /// Get students list by calling stored procedure: sp_GetStudentRegiListData
-        /// </summary>
+        
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
             int facultyId,     
@@ -32,8 +30,6 @@ namespace CollegeSeatAPI.Services
              
             var mode = regMode.Trim().ToLowerInvariant();
                   
-           
-            // Validate and default CategoryType based on SP logic
             switch (mode)
             {
                 case "ofss":
@@ -59,7 +55,6 @@ namespace CollegeSeatAPI.Services
                         nameof(regMode));
             }
 
-            // Let studentName remain null/empty, SP handles both
             var rows = await _db.Set<GetStudentRegiListData>()
                 .FromSqlInterpolated($@"
                     EXEC dbo.sp_GetStudentRegiListData 
@@ -73,9 +68,6 @@ namespace CollegeSeatAPI.Services
             return rows;
         }
 
-        /// <summary>
-        /// Example: faculty dropdown SP
-        /// </summary>
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
