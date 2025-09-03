@@ -33,8 +33,6 @@ namespace BSEB_API2026.Controllers
             return Ok(data);
         }
 
-             
-
         [HttpGet("RegularStudentsRegisterList")]
 
         public async Task<IActionResult> ViewStudentsList(
@@ -46,13 +44,19 @@ namespace BSEB_API2026.Controllers
         {
             try
             {
-              
+
+                //var data = await _studentRegistrationService
+                //    .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
+
+                //if (data is null || !data.Any())
+                //    return NotFound(new { message = "No records found." });
+
                 var data = await _studentRegistrationService
-                    .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
+                   .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
 
                 if (data is null || !data.Any())
                     return NotFound(new { message = "No records found." });
-               
+
                 return Ok(data);
             }
             catch (ArgumentException ex)
@@ -65,6 +69,7 @@ namespace BSEB_API2026.Controllers
             }
         }
           
+
         
         [NonAction]
         [HttpPost("student/{studentId}/register")]
@@ -76,6 +81,7 @@ namespace BSEB_API2026.Controllers
                 Url = $"studentregform?studentId={studentId}&categoryType={categoryType}"
             });
         }
+
 
 
         [NonAction]
