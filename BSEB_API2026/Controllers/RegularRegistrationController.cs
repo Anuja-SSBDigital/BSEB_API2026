@@ -15,6 +15,7 @@ namespace BSEB_API2026.Controllers
         private readonly AppDbContext _db;
         private readonly IStudentRegistrationService _studentRegistrationService;
 
+
         public RegularRegistrationController(
             ITheoryadmitcardService service,   
             AppDbContext db,
@@ -33,6 +34,7 @@ namespace BSEB_API2026.Controllers
             return Ok(data);
         }
 
+
         [HttpGet("RegularStudentsRegisterList")]
 
         public async Task<IActionResult> ViewStudentsList(
@@ -45,6 +47,14 @@ namespace BSEB_API2026.Controllers
             try
             {
 
+                //var data = await _studentRegistrationService
+                //   .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
+
+                //if (data is null || !data.Any())
+                //    return NotFound(new { message = "No records found." });
+
+                //return Ok(data);
+
                 var data = await _studentRegistrationService
                    .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
 
@@ -52,7 +62,10 @@ namespace BSEB_API2026.Controllers
                     return NotFound(new { message = "No records found." });
 
                 return Ok(data);
+
+
             }
+
             catch (ArgumentException ex)
             {
                 return BadRequest(new { message = ex.Message });
@@ -63,6 +76,7 @@ namespace BSEB_API2026.Controllers
             }
         }
        
+
         [NonAction]
         [HttpPost("student/{studentId}/register")]
         public IActionResult RegisterStudent(string studentId, string categoryType = "Regular")
@@ -73,6 +87,7 @@ namespace BSEB_API2026.Controllers
                 Url = $"studentregform?studentId={studentId}&categoryType={categoryType}"
             });
         }
+
           
         [NonAction]
         [HttpDelete("student/{studentId}")]
