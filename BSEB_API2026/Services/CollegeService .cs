@@ -18,7 +18,7 @@ namespace CollegeSeatAPI.Services
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
             int facultyId,     
-            string regMode,     
+            string regMode,                      
             string? categoryType,           
             string? studentName)   
         {
@@ -36,7 +36,20 @@ namespace CollegeSeatAPI.Services
                         categoryType = "Regular";
                     break;
 
-              
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
+                //case "display-registered":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        throw new ArgumentException(
+                //            "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
+                //            nameof(categoryType));
+                //    break;                      ?
+
+
                 case "non-ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Private";
@@ -47,8 +60,7 @@ namespace CollegeSeatAPI.Services
                         throw new ArgumentException(
                             "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
                             nameof(categoryType));
-                    break;                      ?
-
+                    break;
                 default:
                     throw new ArgumentException(
                         "regMode must be one of: ofss, non-ofss, display-registered.",
