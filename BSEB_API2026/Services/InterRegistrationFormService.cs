@@ -19,7 +19,7 @@ namespace BSEB_API2026.Services
             _context = context;
         }
 
-
+            
         public async Task<List<StudentRegistrationDTo>> GetStudentRegistrationViewData(string studentId, string? collegeId, int facultyId)
         {
             try
@@ -41,14 +41,14 @@ namespace BSEB_API2026.Services
                         new SqlParameter("@CollegeId", (object?)collegeId ?? DBNull.Value),
                         new SqlParameter("@FacultyId", (object)facultyId ?? DBNull.Value),
                     };
-
-
+              
+              
                     var students = await _context.StudentRegistrationViewMaster
                         .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
                             parameters.ToArray())
                         .ToListAsync();
 
-
+                             
                     var studentRegDtos = students.Select(s => new StudentRegistrationDTo
                     {
                         StudentName = s.StudentName ?? "",
