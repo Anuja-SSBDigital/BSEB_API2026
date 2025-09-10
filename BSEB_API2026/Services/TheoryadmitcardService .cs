@@ -12,7 +12,7 @@ namespace BSEB_API2026.Services
 
         public TheoryadmitcardService(IConfiguration config)
         {
-            _config = config;
+            _config = config; 
         }
 
         private string GetConnString()
@@ -95,22 +95,6 @@ ORDER BY stu.Pk_StudentId DESC;
            
             while (await reader.ReadAsync())
             {
-                //students.Add(new StudentDto
-                //{
-                //    StudentId = reader["StudentId"]?.ToString(),
-                //    StudentFullName = reader["StudentFullName"]?.ToString(),
-                //    FatherName = reader["FatherName"]?.ToString(),
-                //    MotherName = reader["MotherName"]?.ToString(),
-                //    DOB = reader["DOB"]?.ToString(),
-                //    CollegeId = reader["CollegeId"]?.ToString(),
-                //    CollegeName = reader["CollegeName"]?.ToString(),
-                //    FacultyId = reader["FacultyId"]?.ToString(),
-                //    FacultyName = reader["FacultyName"]?.ToString(),
-                //    ExamTypeId = reader["ExamTypeId"]?.ToString(),
-                //    IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
-                //                        Convert.ToBoolean(reader["IsRegCardUploaded"])
-                //});
-
 
                 students.Add(new StudentDto
                 {
