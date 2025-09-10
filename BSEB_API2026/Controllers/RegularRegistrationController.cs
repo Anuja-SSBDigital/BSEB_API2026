@@ -33,7 +33,6 @@ namespace BSEB_API2026.Controllers
             return Ok(data);
         }
 
-
         [HttpGet("RegularStudentsRegisterList")]
 
         public async Task<IActionResult> ViewStudentsList(
@@ -53,8 +52,18 @@ namespace BSEB_API2026.Controllers
 
                 return Ok(data);
 
-
+                  
             }
+
+            //    catch (ArgumentException ex)
+            //    {
+            //        return BadRequest(new { message = ex.Message });
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        return StatusCode(500, new { message = "Internal Server Error", detail = ex.Message });
+            //    }
+            //}  
 
             catch (ArgumentException ex)
             {
@@ -65,7 +74,9 @@ namespace BSEB_API2026.Controllers
                 return StatusCode(500, new { message = "Internal Server Error", detail = ex.Message });
             }
         }
-       
+
+
+
         [NonAction]
         [HttpPost("student/{studentId}/register")]
         public IActionResult RegisterStudent(string studentId, string categoryType = "Regular")
