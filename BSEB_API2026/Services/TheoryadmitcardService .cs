@@ -23,7 +23,6 @@ namespace BSEB_API2026.Services
             return cs;
         }
 
-
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -85,8 +84,6 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
 
-
-
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -111,6 +108,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
                                       Convert.ToBoolean(reader["IsRegCardUploaded"])
                 });
+
             }
 
             return students;
