@@ -32,7 +32,18 @@ namespace CollegeSeatAPI.Services
 
             switch (mode)
             {
-                case "ofss":     
+                //case "ofss":     
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Regular";
+                //    break;
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
+
+                case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
                     break;
@@ -41,6 +52,7 @@ namespace CollegeSeatAPI.Services
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Private";
                     break;
+
 
                 case "display-registered":
                     if (string.IsNullOrWhiteSpace(categoryType))
