@@ -25,6 +25,7 @@ namespace BSEB_API2026.Controllers
             _studentRegistrationService = studentRegistrationService;
         }   
            
+
         [NonAction]     
         [HttpGet("faculties")]         
         public async Task<IActionResult> GetFaculties()              
@@ -43,17 +44,26 @@ namespace BSEB_API2026.Controllers
             [FromQuery] string? studentName)
          {
             try     
-            {      
-                  
+            {
+
+                //var data = await _studentRegistrationService
+                //   .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
+
+
+                //if (data is null || !data.Any())
+                //    return NotFound(new { message = "No records found." });
+
+                //return Ok(data);      
+
                 var data = await _studentRegistrationService
-                   .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
-                
-                
+                .GetStudentsAsync(collegeId, facultyId, regMode, categoryType, studentName);
+
+
                 if (data is null || !data.Any())
                     return NotFound(new { message = "No records found." });
-                 
-                return Ok(data);      
-                  
+
+                return Ok(data);
+
             }
 
             catch (ArgumentException ex)
