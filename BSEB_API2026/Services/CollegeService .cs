@@ -13,7 +13,8 @@ namespace CollegeSeatAPI.Services
         public CollegeService(AppDbContext db)
         {
             _db = db;
-        }
+        } 
+
           
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
@@ -32,17 +33,7 @@ namespace CollegeSeatAPI.Services
 
             switch (mode)
             {
-                //case "ofss":     
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Regular";
-                //    break;
-
-                //case "non-ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Private";
-                //    break;
-
-
+              
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -65,7 +56,6 @@ namespace CollegeSeatAPI.Services
                         "regMode must be one of: ofss, non-ofss, display-registered.",
                         nameof(regMode));
             }
-
 
             var rows = await _db.Set<GetStudentRegiListData>()
                 .FromSqlInterpolated($@"
