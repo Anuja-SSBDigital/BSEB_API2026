@@ -31,6 +31,17 @@ namespace BSEB_API2026.Services
             // Adjust schema/table name if different
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
 
+            //using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
+            //using var reader = await cmd.ExecuteReaderAsync();
+
+            //while (await reader.ReadAsync())
+            //{
+            //    faculties.Add(new FacultyDto
+            //    {
+            //        FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
+            //        FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
+            //    });
+            //}
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
@@ -42,9 +53,9 @@ namespace BSEB_API2026.Services
                     FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
                 });
             }
-
             return faculties;
         }
+
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
@@ -81,6 +92,7 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
   AND (@FacultyId IS NULL OR stu.Fk_FacultyId = @FacultyId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
+
 
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
