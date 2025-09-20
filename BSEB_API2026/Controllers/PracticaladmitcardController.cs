@@ -17,6 +17,7 @@ namespace BSEB_API2026.Controllers
             _service = service;
         }
 
+
         [NonAction]
         [HttpGet("faculties")]
         public async Task<IActionResult> GetFaculties()
@@ -24,6 +25,7 @@ namespace BSEB_API2026.Controllers
             var data = await _service.GetFacultiesAsync();
             return Ok(data);
         }
+
 
         [HttpGet("PracticalAdmitCardsStudentLists")]
         public async Task<IActionResult> GetStudents([FromQuery] string collegeId, [FromQuery] string facultyId)
@@ -36,13 +38,12 @@ namespace BSEB_API2026.Controllers
             return Ok(data);
         }
 
+
         [NonAction]
         [HttpPost("download-admitcards")]
         public IActionResult DownloadAdmitCards([FromBody] List<StudentDto> selectedStudents)
         {
-            //if (selectedStudents == null || selectedStudents.Count == 0)
-            //    return BadRequest(new { message = "Please select at least one student" });
-
+            
             if (selectedStudents == null || selectedStudents.Count == 0)
                 return BadRequest(new { message = "Please select at least one student" });
 
