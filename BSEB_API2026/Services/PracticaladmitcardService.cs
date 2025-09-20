@@ -22,6 +22,7 @@ namespace BSEB_API2026.Services
             return cs;
         }
 
+
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -31,17 +32,7 @@ namespace BSEB_API2026.Services
             // Adjust schema/table name if different
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
 
-            //using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
-            //using var reader = await cmd.ExecuteReaderAsync();
-
-            //while (await reader.ReadAsync())
-            //{
-            //    faculties.Add(new FacultyDto
-            //    {
-            //        FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
-            //        FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
-            //    });
-            //}
+          
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
@@ -67,8 +58,6 @@ namespace BSEB_API2026.Services
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
 
-
-
             const string sql = @"
 SELECT 
     stu.Pk_StudentId      AS StudentId,
@@ -92,7 +81,6 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
   AND (@FacultyId IS NULL OR stu.Fk_FacultyId = @FacultyId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
-
 
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
