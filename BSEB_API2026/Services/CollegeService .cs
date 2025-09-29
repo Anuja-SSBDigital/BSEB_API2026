@@ -29,7 +29,34 @@ namespace CollegeSeatAPI.Services
                     nameof(regMode));      
              
             var mode = regMode.Trim().ToLowerInvariant();
-              
+
+
+
+            //switch (mode)
+            //{
+            //    case "ofss":
+            //        if (string.IsNullOrWhiteSpace(categoryType))
+            //            categoryType = "Regular";
+            //        break;
+
+            //    case "non-ofss":
+            //        if (string.IsNullOrWhiteSpace(categoryType))
+            //            categoryType = "Private";
+            //        break;
+
+            //    case "display-registered":
+            //        if (string.IsNullOrWhiteSpace(categoryType))
+            //            throw new ArgumentException(
+            //                "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
+            //                nameof(categoryType));
+            //        break;
+            //    default:
+            //        throw new ArgumentException(
+            //            "regMode must be one of: ofss, non-ofss, display-registered.",
+            //            nameof(regMode));
+            //}
+
+
 
             switch (mode)
             {
@@ -54,8 +81,6 @@ namespace CollegeSeatAPI.Services
                         "regMode must be one of: ofss, non-ofss, display-registered.",
                         nameof(regMode));
             }
-
-
 
             var rows = await _db.Set<GetStudentRegiListData>()
                 .FromSqlInterpolated($@"
