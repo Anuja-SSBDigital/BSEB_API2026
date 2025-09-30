@@ -18,6 +18,7 @@ namespace BSEB_API2026.Controllers
         }
 
 
+
         [NonAction]
         [HttpGet("faculties")]
         public async Task<IActionResult> GetFaculties()
@@ -39,11 +40,28 @@ namespace BSEB_API2026.Controllers
         }
 
 
+        //[NonAction]
+        //[HttpPost("download-admitcards")]
+        //public IActionResult DownloadAdmitCards([FromBody] List<StudentDto> selectedStudents)
+        //{
+
+        //    if (selectedStudents == null || selectedStudents.Count == 0)
+        //        return BadRequest(new { message = "Please select at least one student" });
+
+
+        //    return Ok(new
+        //    {
+        //        message = "Admit cards generated",
+        //        students = selectedStudents
+        //    });
+        //}
+
+
         [NonAction]
         [HttpPost("download-admitcards")]
         public IActionResult DownloadAdmitCards([FromBody] List<StudentDto> selectedStudents)
         {
-            
+
             if (selectedStudents == null || selectedStudents.Count == 0)
                 return BadRequest(new { message = "Please select at least one student" });
 
