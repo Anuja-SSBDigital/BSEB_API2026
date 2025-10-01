@@ -58,8 +58,6 @@ namespace BSEB_API2026.Services
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
 
-
-
             const string sql = @"
 SELECT 
     stu.Pk_StudentId      AS StudentId,
@@ -84,6 +82,7 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
 
+
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -92,6 +91,23 @@ ORDER BY stu.Pk_StudentId DESC;
            
             while (await reader.ReadAsync())
             {
+
+                //students.Add(new StudentDto
+                //{
+                //    StudentId = reader["StudentId"]?.ToString(),
+                //    StudentFullName = reader["StudentFullName"]?.ToString(),
+                //    FatherName = reader["FatherName"]?.ToString(),
+                //    MotherName = reader["MotherName"]?.ToString(),
+                //    DOB = reader["DOB"]?.ToString(),
+                //    CollegeId = reader["CollegeId"]?.ToString(),
+                //    CollegeName = reader["CollegeName"]?.ToString(),
+                //    FacultyId = reader["FacultyId"]?.ToString(),
+                //    FacultyName = reader["FacultyName"]?.ToString(),
+                //    ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                //    IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
+                //                      Convert.ToBoolean(reader["IsRegCardUploaded"])
+                //});
+
 
                 students.Add(new StudentDto
                 {
@@ -106,7 +122,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     FacultyName = reader["FacultyName"]?.ToString(),
                     ExamTypeId = reader["ExamTypeId"]?.ToString(),
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
-                                      Convert.ToBoolean(reader["IsRegCardUploaded"])
+                                     Convert.ToBoolean(reader["IsRegCardUploaded"])
                 });
 
             }
