@@ -32,16 +32,6 @@ namespace CollegeSeatAPI.Services
 
             switch (mode)
             {
-                //case "ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Regular";
-                //    break;
-
-                //case "non-ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Private";
-                //    break;
-
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -76,7 +66,6 @@ namespace CollegeSeatAPI.Services
 
             return rows;
         }
-
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
