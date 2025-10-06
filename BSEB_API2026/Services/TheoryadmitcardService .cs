@@ -15,14 +15,6 @@ namespace BSEB_API2026.Services
             _config = config; 
         }
 
-        //private string GetConnString()
-        //{
-        //    var cs = _config.GetConnectionString("DefaultConnection"); 
-        //    if (string.IsNullOrWhiteSpace(cs))
-        //        throw new InvalidOperationException("Connection string 'dbcs' not found or empty.");
-        //    return cs;
-        //}
-
         private string GetConnString()
         {
             var cs = _config.GetConnectionString("DefaultConnection");
@@ -97,8 +89,10 @@ ORDER BY stu.Pk_StudentId DESC;
             while (await reader.ReadAsync())
             {
 
+
                 students.Add(new StudentDto
                 {
+
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
