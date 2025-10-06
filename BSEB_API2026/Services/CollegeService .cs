@@ -30,8 +30,19 @@ namespace CollegeSeatAPI.Services
              
             var mode = regMode.Trim().ToLowerInvariant();
 
+
             switch (mode)
             {
+                //case "ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Regular";
+                //    break;
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -41,6 +52,7 @@ namespace CollegeSeatAPI.Services
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Private";
                     break;
+
 
                 case "display-registered":
                     if (string.IsNullOrWhiteSpace(categoryType))
@@ -54,16 +66,26 @@ namespace CollegeSeatAPI.Services
                         nameof(regMode));
             }
 
+            //var rows = await _db.Set<GetStudentRegiListData>()
+            //    .FromSqlInterpolated($@"
+            //        EXEC dbo.sp_GetStudentRegiListData 
+            //            @CollegeId        = {collegeId},
+            //            @FacultyId        = {facultyId},
+            //            @RegistrationMode = {mode},
+            //            @CategoryType     = {categoryType},
+            //            @StudentName      = {studentName}")
+            //    .ToListAsync();
+
+
             var rows = await _db.Set<GetStudentRegiListData>()
-                .FromSqlInterpolated($@"
+              .FromSqlInterpolated($@"
                     EXEC dbo.sp_GetStudentRegiListData 
                         @CollegeId        = {collegeId},
                         @FacultyId        = {facultyId},
                         @RegistrationMode = {mode},
                         @CategoryType     = {categoryType},
                         @StudentName      = {studentName}")
-                .ToListAsync();
-
+              .ToListAsync();
             return rows;
         }
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
