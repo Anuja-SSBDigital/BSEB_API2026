@@ -15,6 +15,7 @@ namespace CollegeSeatAPI.Services
             _db = db;
         } 
 
+
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
             int facultyId,     
@@ -31,18 +32,10 @@ namespace CollegeSeatAPI.Services
             var mode = regMode.Trim().ToLowerInvariant();
 
 
+
             switch (mode)
             {
-                //case "ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Regular";
-                //    break;
-
-                //case "non-ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Private";
-                //    break;
-
+               
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -66,17 +59,6 @@ namespace CollegeSeatAPI.Services
                         nameof(regMode));
             }
 
-            //var rows = await _db.Set<GetStudentRegiListData>()
-            //    .FromSqlInterpolated($@"
-            //        EXEC dbo.sp_GetStudentRegiListData 
-            //            @CollegeId        = {collegeId},
-            //            @FacultyId        = {facultyId},
-            //            @RegistrationMode = {mode},
-            //            @CategoryType     = {categoryType},
-            //            @StudentName      = {studentName}")
-            //    .ToListAsync();
-
-
             var rows = await _db.Set<GetStudentRegiListData>()
               .FromSqlInterpolated($@"
                     EXEC dbo.sp_GetStudentRegiListData 
@@ -88,6 +70,7 @@ namespace CollegeSeatAPI.Services
               .ToListAsync();
             return rows;
         }
+
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
