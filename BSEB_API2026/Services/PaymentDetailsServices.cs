@@ -9,6 +9,7 @@ namespace BSEB_API2026.Services
     public class PaymentDetailsServices : IPaymentDetails
     {
         private readonly AppDbContext _context;
+        private List<REGPaymentTransactionSummary> paymentModel;
 
         public PaymentDetailsServices(AppDbContext context)
         {
