@@ -12,7 +12,8 @@ namespace BSEB_API2026.Data
         public DbSet<StudentPaymentMaster> StudentPaymentMaster { get; set; }
 
         public DbSet<REGPaymentTransactionSummary> REGPaymentTransactionSummary { get; set; }
-
+        public DbSet<StudentRegistrationViewMaster> StudentRegistrationViewMaster { get; set; }
+        public DbSet<SubjectPaperResult> SubjectPapers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,10 @@ namespace BSEB_API2026.Data
             modelBuilder.Entity<CollegeMaster>().HasNoKey();
             modelBuilder.Entity<StudentPaymentMaster>().HasNoKey();
             modelBuilder.Entity<REGPaymentTransactionSummary>().HasNoKey();
+            modelBuilder.Entity<StudentRegistrationViewMaster>().HasNoKey();
+            modelBuilder.Entity<SubjectPaperResult>().HasNoKey();
+            modelBuilder.Entity<StudentRegistrationViewMaster>().Ignore(s => s.Subjects);
+            //modelBuilder.Entity<StudentRegistrationDTo>().Ignore(s => s.Subjects);
         }
     }
 }
