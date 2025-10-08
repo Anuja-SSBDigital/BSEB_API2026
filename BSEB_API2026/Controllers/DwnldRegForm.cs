@@ -15,6 +15,8 @@ namespace BSEB_API2026.Controllers
             _DwnldRegFormService = DwnldRegFormService;
         }
 
+
+
         [HttpGet("GetStudentData")]
         public async Task<IActionResult> GetStudentData(string? collegeId, string collegeCode, string? studentName, int facultyId)
         {
@@ -23,6 +25,7 @@ namespace BSEB_API2026.Controllers
             var result = await _DwnldRegFormService.GetStudentDataAsync(collegeId, collegeCode, studentName, facultyId);
             return Ok(result);
         }
+
 
         [HttpGet("GetStudentDataforPayment")]
         public async Task<IActionResult> GetStudentDataforPayment(int collegeId, string collegeCode, string studentName, int facultyId,string subcategory)

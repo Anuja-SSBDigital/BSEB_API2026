@@ -13,6 +13,7 @@ namespace BSEB_API2026.Services
         {
             _context = context;
         }
+
         public async Task<List<StudentDTO>> GetStudentDataAsync(string? collegeId, string? collegeCode, string? studentName, int facultyId)
         {
             try
@@ -26,10 +27,13 @@ namespace BSEB_API2026.Services
             new SqlParameter("@SubCategory", "")
         };
 
+
+
                 var students = await _context.StudentMaster
                     .FromSqlRaw("EXEC sp_GetStudentDetails @CollegeId, @CollegeCode, @StudentName, @FacultyId, @SubCategory",
                         parameters.ToArray())
                     .ToListAsync();
+
 
                 var studentDtos = students.Select(s => new StudentDTO
                 {
@@ -46,7 +50,6 @@ namespace BSEB_API2026.Services
    
                 }).ToList();
 
-
                 return studentDtos;
             }
             catch (Exception ex)
@@ -54,8 +57,6 @@ namespace BSEB_API2026.Services
                 throw new Exception("Error fetching student data", ex);
             }
         }
-
-
 
         public async Task<List<StudentExtendedDTO>> GetStudentDataforPayment(int collegeId, string? collegeCode, string? studentName, int facultyId, string? subCategory)
         {
@@ -69,6 +70,7 @@ namespace BSEB_API2026.Services
             new SqlParameter("@FacultyId", (object)facultyId ?? DBNull.Value),
             new SqlParameter("@SubCategory", (object?)subCategory ?? DBNull.Value)
         };
+
 
                 var students = await _context.StudentPaymentMaster
                     .FromSqlRaw("EXEC sp_GetStudentDetails @CollegeId, @CollegeCode, @StudentName, @FacultyId, @SubCategory",
@@ -85,8 +87,6 @@ namespace BSEB_API2026.Services
                     MotherName = s.MotherName ?? "",
                     DOB = s.DOB ?? DateTime.MinValue,
                
-               
-
                     BoardName = s.BoardName ?? "",
                     CategoryName = s.CategoryName ?? "",
 

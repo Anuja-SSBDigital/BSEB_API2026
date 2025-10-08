@@ -11,7 +11,6 @@ namespace BSEB_API2026.Services
     public class LoginService : ILoginService
     {
         private readonly AppDbContext _context;
-
         public LoginService(AppDbContext context)
         {
             _context = context;
@@ -32,9 +31,9 @@ namespace BSEB_API2026.Services
 
             var messageParam = new SqlParameter("@Message", System.Data.SqlDbType.NVarChar, 100)
             {
-                Direction = System.Data.ParameterDirection.Output
+                  Direction = System.Data.ParameterDirection.Output
             };
-
+                 
             try
             {
                 var data = await _context.CollegeMaster.FromSqlRaw("EXEC sp_LoginUser @Username, @Password, @IsSuccess OUT, @Message OUT", usernameParam, passwordParam, isSuccessParam, messageParam).ToListAsync();
@@ -48,7 +47,6 @@ namespace BSEB_API2026.Services
                 throw new Exception("Error during login: " + ex.Message, ex);
             }
         }
-
 
         private string ComputeSha256Hash(string rawData)
         {
