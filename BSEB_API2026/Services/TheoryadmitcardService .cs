@@ -15,7 +15,6 @@ namespace BSEB_API2026.Services
             _config = config; 
         }
 
-
         private string GetConnString()
         {
             var cs = _config.GetConnectionString("DefaultConnection");
@@ -23,7 +22,6 @@ namespace BSEB_API2026.Services
                 throw new InvalidOperationException("Connection string 'dbcs' not found or empty.");
             return cs;
         }
-
 
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
@@ -37,14 +35,24 @@ namespace BSEB_API2026.Services
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
-            while (await reader.ReadAsync())      
+            //while (await reader.ReadAsync())      
+            //{
+            //    faculties.Add(new FacultyDto
+            //    {
+            //        FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
+            //        FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
+            //    });
+            //}  
+
+            while (await reader.ReadAsync())
             {
                 faculties.Add(new FacultyDto
                 {
                     FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
                     FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
                 });
-            }  
+            }
+
 
             return faculties;
         }
@@ -92,10 +100,8 @@ ORDER BY stu.Pk_StudentId DESC;
            
             while (await reader.ReadAsync())
             {
-
                 students.Add(new StudentDto
                 {
-
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
@@ -111,6 +117,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
                                      Convert.ToBoolean(reader["IsRegCardUploaded"])
                 });
+
 
             }
 
