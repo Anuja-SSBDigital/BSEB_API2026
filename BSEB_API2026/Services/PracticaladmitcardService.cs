@@ -22,7 +22,6 @@ namespace BSEB_API2026.Services
             return cs;
         }
 
-
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -45,8 +44,6 @@ namespace BSEB_API2026.Services
             }
             return faculties;
         }
-
-
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
@@ -83,6 +80,7 @@ ORDER BY stu.Pk_StudentId DESC;
 ";
 
 
+
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -93,22 +91,13 @@ ORDER BY stu.Pk_StudentId DESC;
             {
                 students.Add(new StudentDto
                 {
+
+
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
                     MotherName = reader["MotherName"]?.ToString(),
-                    //DOB = reader["DOB"]?.ToString(),
-                    //CollegeId = reader["CollegeId"]?.ToString(),
-
-                    //CollegeName = reader["CollegeName"]?.ToString(),
-                    //FacultyId = reader["FacultyId"]?.ToString(),
-                    //FacultyName = reader["FacultyName"]?.ToString(),
-                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
-                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
-                    //                    Convert.ToBoolean(reader["IsRegCardUploaded"])
-
-
-
+                    
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
 
