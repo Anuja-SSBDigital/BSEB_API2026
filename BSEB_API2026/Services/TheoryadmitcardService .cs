@@ -35,15 +35,6 @@ namespace BSEB_API2026.Services
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
-            //while (await reader.ReadAsync())      
-            //{
-            //    faculties.Add(new FacultyDto
-            //    {
-            //        FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
-            //        FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
-            //    });
-            //}  
-
             while (await reader.ReadAsync())
             {
                 faculties.Add(new FacultyDto
@@ -52,7 +43,6 @@ namespace BSEB_API2026.Services
                     FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
                 });
             }
-
 
             return faculties;
         }
@@ -94,6 +84,8 @@ ORDER BY stu.Pk_StudentId DESC;
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
+
+
 
 
             using var reader = await cmd.ExecuteReaderAsync();
