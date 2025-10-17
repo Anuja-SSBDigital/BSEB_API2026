@@ -28,6 +28,7 @@ namespace BSEB_API2026.Services
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
 
+
             // Adjust schema/table name if different
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
 
@@ -36,6 +37,12 @@ namespace BSEB_API2026.Services
 
             while (await reader.ReadAsync())
             {
+                //faculties.Add(new FacultyDto
+                //{
+                //    FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
+                //    FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
+                //});
+
                 faculties.Add(new FacultyDto
                 {
                     FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
@@ -79,8 +86,6 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
 
-
-
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -91,13 +96,12 @@ ORDER BY stu.Pk_StudentId DESC;
             {
                 students.Add(new StudentDto
                 {
-
-
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
                     MotherName = reader["MotherName"]?.ToString(),
                     
+
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
 
