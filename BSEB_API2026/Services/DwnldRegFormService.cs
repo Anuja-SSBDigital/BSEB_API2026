@@ -26,9 +26,6 @@ namespace BSEB_API2026.Services
             new SqlParameter("@FacultyId", (object)facultyId ?? DBNull.Value),
             new SqlParameter("@SubCategory", "")
         };
-
-
-
                 var students = await _context.StudentMaster
                     .FromSqlRaw("EXEC sp_GetStudentDetails @CollegeId, @CollegeCode, @StudentName, @FacultyId, @SubCategory",
                         parameters.ToArray())
