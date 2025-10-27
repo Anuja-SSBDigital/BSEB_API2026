@@ -47,6 +47,10 @@ namespace BSEB_API2026.Services
                         .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
                             parameters.ToArray())
                         .ToListAsync();
+                    //var students = await _context.StudentRegistrationViewMaster
+                    //    .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
+                    //        parameters.ToArray())
+                    //    .ToListAsync();
 
                              
                     var studentRegDtos = students.Select(s => new StudentRegistrationDTo
