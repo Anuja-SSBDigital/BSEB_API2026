@@ -30,13 +30,8 @@ namespace BSEB_API2026.Services
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
 
-            // Adjust schema/table name if different
+            
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
-
-            //using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
-            //using var reader = await cmd.ExecuteReaderAsync();
-
-
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
@@ -55,7 +50,6 @@ namespace BSEB_API2026.Services
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
-            // Defensive trims
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
 
@@ -103,6 +97,16 @@ ORDER BY stu.Pk_StudentId DESC;
                    
                     MotherName = reader["MotherName"]?.ToString(),
                     DOB = reader["DOB"]?.ToString(),
+
+
+                    //CollegeId = reader["CollegeId"]?.ToString(),
+                    //CollegeName = reader["CollegeName"]?.ToString(),
+                    //FacultyId = reader["FacultyId"]?.ToString(),
+                    //FacultyName = reader["FacultyName"]?.ToString(),
+                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
+                    //                 Convert.ToBoolean(reader["IsRegCardUploaded"])
+
 
 
                     CollegeId = reader["CollegeId"]?.ToString(),
