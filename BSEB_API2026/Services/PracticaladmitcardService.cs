@@ -14,6 +14,7 @@ namespace BSEB_API2026.Services
             _config = config;
         }
 
+
         private string GetConnString()
         {
             var cs = _config.GetConnectionString("DefaultConnection");
@@ -37,12 +38,7 @@ namespace BSEB_API2026.Services
 
             while (await reader.ReadAsync())
             {
-                //faculties.Add(new FacultyDto
-                //{
-                //    FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
-                //    FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
-                //});
-
+                
                 faculties.Add(new FacultyDto
                 {
                     FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
@@ -51,6 +47,7 @@ namespace BSEB_API2026.Services
             }
             return faculties;
         }
+
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
@@ -101,6 +98,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     FatherName = reader["FatherName"]?.ToString(),
                     MotherName = reader["MotherName"]?.ToString(),
                     
+
 
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
