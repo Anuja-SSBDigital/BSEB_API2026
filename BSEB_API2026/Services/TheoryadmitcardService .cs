@@ -15,6 +15,7 @@ namespace BSEB_API2026.Services
             _config = config; 
         }
 
+
         private string GetConnString()
         {
             var cs = _config.GetConnectionString("DefaultConnection");
@@ -26,6 +27,7 @@ namespace BSEB_API2026.Services
 
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
+
             var faculties = new List<FacultyDto>();
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
@@ -47,15 +49,13 @@ namespace BSEB_API2026.Services
             return faculties;
         }
 
+
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
 
-            //var students = new List<StudentDto>();
-            //using var conn = new SqlConnection(GetConnString());
-            //await conn.OpenAsync();
-
+            
             var students = new List<StudentDto>();
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
@@ -86,6 +86,7 @@ ORDER BY stu.Pk_StudentId DESC;
 ";
 
 
+
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -101,17 +102,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
 
-                    //MotherName = reader["MotherName"]?.ToString(),
-                    //DOB = reader["DOB"]?.ToString(),
-
-                    //CollegeId = reader["CollegeId"]?.ToString(),
-                    //CollegeName = reader["CollegeName"]?.ToString(),
-                    //FacultyId = reader["FacultyId"]?.ToString(),
-                    //FacultyName = reader["FacultyName"]?.ToString(),
-                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
-                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
-                    //                 Convert.ToBoolean(reader["IsRegCardUploaded"])
-
+                  
                     MotherName = reader["MotherName"]?.ToString(),
                     DOB = reader["DOB"]?.ToString(),
 
