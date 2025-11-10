@@ -13,6 +13,10 @@ namespace BSEB_API2026.Services
         {
             _context = context;
         }
+        //public DwnldRegFormService(AppDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         public async Task<List<StudentDTO>> GetStudentDataAsync(string? collegeId, string? collegeCode, string? studentName, int facultyId)
         {
