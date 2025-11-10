@@ -14,7 +14,7 @@ namespace BSEB_API2026.Controllers
         {
             _DwnldRegFormService = DwnldRegFormService;
         }
-        //public DwnldRegForm(IDwnldRegFormService DwnldRegFormService)
+        //public DwnldRegFormNew(IDwnldRegFormService DwnldRegFormService)
         //{
         //    _DwnldRegFormService = DwnldRegFormService;
         //}
