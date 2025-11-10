@@ -97,7 +97,10 @@ namespace BSEB_API2026.Services
 
                     allStudents.AddRange(studentRegDtos);
                 }
-
+                //var students = await _context.StudentRegistrationViewMaster
+                //    .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
+                //        parameters.ToArray())
+                //    .ToListAsync();
                 return allStudents;
             }
             catch (Exception ex)
