@@ -1,4 +1,5 @@
-﻿using BSEB_API2026.Data;
+﻿using BSEB_API2026.Controllers;
+using BSEB_API2026.Data;
 using BSEB_API2026.Middleware;
 using BSEB_API2026.Services; // ✅ Add this
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Service registration for DI
 builder.Services.AddScoped<IDwnldRegFormService, DwnldRegFormService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<_InterRegistrationFormService, InterRegistrationFormService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
