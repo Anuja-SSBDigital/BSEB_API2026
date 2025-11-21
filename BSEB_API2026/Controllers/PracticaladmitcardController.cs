@@ -18,26 +18,6 @@ namespace BSEB_API2026.Controllers
         }
 
 
-        //[NonAction]
-        //[HttpGet("faculties")]
-        //public async Task<IActionResult> GetFaculties()
-        //{
-        //    var data = await _service.GetFacultiesAsync();
-        //    return Ok(data);
-        //}
-
-        //[HttpGet("PracticalAdmitCardsStudentLists")]
-        //public async Task<IActionResult> GetStudents([FromQuery] string collegeId, [FromQuery] string facultyId)
-        //{
-
-        //    var data = await _service.GetStudentsAsync(collegeId, facultyId);
-        //    if (!data.Any())
-        //        return NotFound(new { message = "No students found" });
-
-        //    return Ok(data);
-        //}
-
-
         [NonAction]
         [HttpGet("faculties")]
         public async Task<IActionResult> GetFaculties()
@@ -45,7 +25,6 @@ namespace BSEB_API2026.Controllers
             var data = await _service.GetFacultiesAsync();
             return Ok(data);
         }
-
 
 
         [HttpGet("PracticalAdmitCardsStudentLists")]
@@ -58,8 +37,6 @@ namespace BSEB_API2026.Controllers
 
             return Ok(data);
         }
-
-
 
 
         [NonAction]
