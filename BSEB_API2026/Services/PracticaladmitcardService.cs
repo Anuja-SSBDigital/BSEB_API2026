@@ -9,7 +9,6 @@ namespace BSEB_API2026.Services
     {
         private readonly IConfiguration _config;
 
-
         public PracticaladmitcardService(IConfiguration config)
         {
             _config = config;
@@ -23,7 +22,6 @@ namespace BSEB_API2026.Services
             return cs;
         }
 
-
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -32,7 +30,6 @@ namespace BSEB_API2026.Services
 
 
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
-
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
@@ -60,6 +57,7 @@ namespace BSEB_API2026.Services
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
 
+
             const string sql = @"
 SELECT 
     stu.Pk_StudentId      AS StudentId,
@@ -84,7 +82,6 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
 
-
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
             cmd.Parameters.Add("@FacultyId", SqlDbType.VarChar, 50).Value = (object?)facultyId ?? DBNull.Value;
@@ -103,14 +100,6 @@ ORDER BY stu.Pk_StudentId DESC;
 
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
-
-                    //CollegeName = reader["CollegeName"]?.ToString(),
-                    //FacultyId = reader["FacultyId"]?.ToString(),
-                    //FacultyName = reader["FacultyName"]?.ToString(),
-                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
-                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
-                    //                    Convert.ToBoolean(reader["IsRegCardUploaded"])
-
 
                     CollegeName = reader["CollegeName"]?.ToString(),
                     FacultyId = reader["FacultyId"]?.ToString(),
