@@ -33,7 +33,6 @@ namespace BSEB_API2026.Services
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
-
             while (await reader.ReadAsync())
             {
                 faculties.Add(new FacultyDto
@@ -49,8 +48,11 @@ namespace BSEB_API2026.Services
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
+
+
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
+
 
             var students = new List<StudentDto>();
             using var conn = new SqlConnection(GetConnString());
@@ -99,6 +101,15 @@ ORDER BY stu.Pk_StudentId DESC;
                     MotherName = reader["MotherName"]?.ToString(),
 
                     DOB = reader["DOB"]?.ToString(),
+
+
+                    //CollegeId = reader["CollegeId"]?.ToString(),
+                    //CollegeName = reader["CollegeName"]?.ToString(),
+                    //FacultyId = reader["FacultyId"]?.ToString(),
+                    //FacultyName = reader["FacultyName"]?.ToString(),
+                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
+                    //                 Convert.ToBoolean(reader["IsRegCardUploaded"])
 
 
                     CollegeId = reader["CollegeId"]?.ToString(),
