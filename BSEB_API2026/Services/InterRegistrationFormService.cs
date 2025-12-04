@@ -22,6 +22,7 @@ namespace BSEB_API2026.Services
             
         public async Task<List<StudentRegistrationDTo>> GetStudentRegistrationViewData(string studentId, string? collegeId, int facultyId)
         {
+
             try
             {
                 // Fetch subjects once
@@ -43,16 +44,12 @@ namespace BSEB_API2026.Services
                     };
               
               
+
                     var students = await _context.StudentRegistrationViewMaster
                         .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
                             parameters.ToArray())
                         .ToListAsync();
-                    //var students = await _context.StudentRegistrationViewMaster
-                    //    .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
-                    //        parameters.ToArray())
-                    //    .ToListAsync();
-
-                             
+                  
                     var studentRegDtos = students.Select(s => new StudentRegistrationDTo
                     {
                         StudentName = s.StudentName ?? "",
@@ -80,6 +77,16 @@ namespace BSEB_API2026.Services
                         MatricRollNumber = s.MatricRollNumber ?? "",
                         MatricPassingYear = s.MatricPassingYear,
                         Gender = s.Gender ?? "",
+                        //MatricBoardName = s.MatricBoardName ?? "",
+                        //CasteCategory = s.CasteCategory ?? "",
+                        //Religion = s.Religion ?? "",
+                        //Nationality = s.Nationality ?? "",
+                        //MobileNo = s.MobileNo ?? "",
+                        //EmailId = s.EmailId ?? "",
+                        //StudentAddress = s.StudentAddress ?? "",
+
+
+
                         MatricBoardName = s.MatricBoardName ?? "",
                         CasteCategory = s.CasteCategory ?? "",
                         Religion = s.Religion ?? "",
@@ -91,16 +98,13 @@ namespace BSEB_API2026.Services
                         MaritalStatus = s.MaritalStatus,
                         SubDivisionName = s.SubDivisionName,
                         Fk_NationalityId = s.Fk_NationalityId,
-                        Subjects = subjects // Assign list directly
+                        Subjects = subjects 
                     }).ToList();
 
 
                     allStudents.AddRange(studentRegDtos);
                 }
-                //var students = await _context.StudentRegistrationViewMaster
-                //    .FromSqlRaw("EXEC GetStudentInterRegiFormData @StudentID, @CollegeId, @FacultyId",
-                //        parameters.ToArray())
-                //    .ToListAsync();
+               
                 return allStudents;
             }
             catch (Exception ex)
