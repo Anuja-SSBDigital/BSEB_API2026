@@ -16,6 +16,7 @@ namespace BSEB_API2026.Services
 
         private string GetConnString()
         {
+
             var cs = _config.GetConnectionString("DefaultConnection");
             if (string.IsNullOrWhiteSpace(cs))
                 throw new InvalidOperationException("Connection string 'dbcs' not found or empty.");
@@ -30,6 +31,7 @@ namespace BSEB_API2026.Services
 
 
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
+
 
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
@@ -50,6 +52,7 @@ namespace BSEB_API2026.Services
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
            
+
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
 
@@ -57,6 +60,7 @@ namespace BSEB_API2026.Services
             var students = new List<StudentDto>();
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
+
 
 
             const string sql = @"
@@ -98,16 +102,30 @@ ORDER BY stu.Pk_StudentId DESC;
 
                     MotherName = reader["MotherName"]?.ToString(),
 
+                    //DOB = reader["DOB"]?.ToString(),
+                    //CollegeId = reader["CollegeId"]?.ToString(),
+
+
+                    //CollegeName = reader["CollegeName"]?.ToString(),
+                    //FacultyId = reader["FacultyId"]?.ToString(),
+                    //FacultyName = reader["FacultyName"]?.ToString(),
+                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
+                    //                    Convert.ToBoolean(reader["IsRegCardUploaded"])
+
+
+
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
 
-                   
+
                     CollegeName = reader["CollegeName"]?.ToString(),
                     FacultyId = reader["FacultyId"]?.ToString(),
                     FacultyName = reader["FacultyName"]?.ToString(),
                     ExamTypeId = reader["ExamTypeId"]?.ToString(),
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
                                         Convert.ToBoolean(reader["IsRegCardUploaded"])
+
 
                 });
             }
