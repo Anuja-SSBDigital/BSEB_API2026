@@ -14,8 +14,10 @@ namespace BSEB_API2026.Services
             _config = config;
         }
 
+
         private string GetConnString()
         {
+
             var cs = _config.GetConnectionString("DefaultConnection");
             if (string.IsNullOrWhiteSpace(cs))
                 throw new InvalidOperationException("Connection string 'dbcs' not found or empty.");
@@ -30,13 +32,11 @@ namespace BSEB_API2026.Services
 
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
 
-
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
             {
-                
                 faculties.Add(new FacultyDto
                 {
                     FacultyId = reader["Pk_FacultyId"] is DBNull ? null : Convert.ToString(reader["Pk_FacultyId"]),
@@ -44,20 +44,18 @@ namespace BSEB_API2026.Services
                 });
             }
 
-
             return faculties;
         }
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
-            // Defensive trims
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
+
 
             var students = new List<StudentDto>();
             using var conn = new SqlConnection(GetConnString());
             await conn.OpenAsync();
-
 
             const string sql = @"
 SELECT 
@@ -90,19 +88,19 @@ ORDER BY stu.Pk_StudentId DESC;
 
             using var reader = await cmd.ExecuteReaderAsync();
 
-
             while (await reader.ReadAsync())
             {
                 students.Add(new StudentDto
                 {
-
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
+
                     MotherName = reader["MotherName"]?.ToString(),
 
                     DOB = reader["DOB"]?.ToString(),
                     CollegeId = reader["CollegeId"]?.ToString(),
+
 
                     CollegeName = reader["CollegeName"]?.ToString(),
                     FacultyId = reader["FacultyId"]?.ToString(),
@@ -110,6 +108,20 @@ ORDER BY stu.Pk_StudentId DESC;
                     ExamTypeId = reader["ExamTypeId"]?.ToString(),
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
                                         Convert.ToBoolean(reader["IsRegCardUploaded"])
+
+
+                    //DOB = reader["DOB"]?.ToString(),
+                    //CollegeId = reader["CollegeId"]?.ToString(),
+
+
+                    //CollegeName = reader["CollegeName"]?.ToString(),
+                    //FacultyId = reader["FacultyId"]?.ToString(),
+                    //FacultyName = reader["FacultyName"]?.ToString(),
+                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                    //IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
+                    //                    Convert.ToBoolean(reader["IsRegCardUploaded"])
+
+
                 });
             }
             return students;
