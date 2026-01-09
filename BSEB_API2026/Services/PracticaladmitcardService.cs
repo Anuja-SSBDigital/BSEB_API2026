@@ -33,11 +33,7 @@ namespace BSEB_API2026.Services
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             using var reader = await cmd.ExecuteReaderAsync();
 
-            //const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
-
-            //using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
-            //using var reader = await cmd.ExecuteReaderAsync();
-
+           
             while (await reader.ReadAsync())
             {
                 faculties.Add(new FacultyDto
@@ -83,7 +79,6 @@ WHERE (@CollegeId IS NULL OR stu.Fk_CollegeId = @CollegeId)
   AND (@FacultyId IS NULL OR stu.Fk_FacultyId = @FacultyId)
 ORDER BY stu.Pk_StudentId DESC;
 ";
-
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
             cmd.Parameters.Add("@CollegeId", SqlDbType.VarChar, 50).Value = (object?)collegeId ?? DBNull.Value;
