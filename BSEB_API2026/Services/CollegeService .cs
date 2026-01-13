@@ -15,6 +15,7 @@ namespace CollegeSeatAPI.Services
             _db = db;
         } 
 
+
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
             int facultyId,     
@@ -49,7 +50,25 @@ namespace CollegeSeatAPI.Services
                     break;
 
 
-             
+                //case "ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Regular";
+                //    break;
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
+                //case "display-registered":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        throw new ArgumentException(
+                //            "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
+                //            nameof(categoryType));
+                //    break;
+
+
+
                 default:
                     throw new ArgumentException(
                         "regMode must be one of: ofss, non-ofss, display-registered.",
@@ -67,7 +86,9 @@ namespace CollegeSeatAPI.Services
               .ToListAsync();
             return rows;
 
+
         }
+
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
