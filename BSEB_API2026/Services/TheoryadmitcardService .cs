@@ -24,9 +24,6 @@ namespace BSEB_API2026.Services
 
             return cs;
         }
-
-
-
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -48,20 +45,14 @@ namespace BSEB_API2026.Services
                     FacultyName = reader["FacultyName"] is DBNull ? null : Convert.ToString(reader["FacultyName"])
                 });
             }
-
-
-
             return faculties;
         }
-
 
         public async Task<IEnumerable<StudentDto>> GetStudentsAsync(string collegeId, string facultyId)
         {
 
             collegeId = string.IsNullOrWhiteSpace(collegeId) ? null : collegeId.Trim();
             facultyId = string.IsNullOrWhiteSpace(facultyId) ? null : facultyId.Trim();
-
-
 
             var students = new List<StudentDto>();
             using var conn = new SqlConnection(GetConnString());
@@ -101,20 +92,11 @@ ORDER BY stu.Pk_StudentId DESC;
             {
                 students.Add(new StudentDto
                 {
-
                     StudentId = reader["StudentId"]?.ToString(),
                     StudentFullName = reader["StudentFullName"]?.ToString(),
                     FatherName = reader["FatherName"]?.ToString(),
 
-
                     MotherName = reader["MotherName"]?.ToString(),
-
-                    //DOB = reader["DOB"]?.ToString(),
-
-                    //CollegeId = reader["CollegeId"]?.ToString(),
-                    //CollegeName = reader["CollegeName"]?.ToString(),
-                    //FacultyId = reader["FacultyId"]?.ToString(),
-
 
                     DOB = reader["DOB"]?.ToString(),
 
