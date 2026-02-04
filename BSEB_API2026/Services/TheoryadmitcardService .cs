@@ -15,6 +15,7 @@ namespace BSEB_API2026.Services
             _config = config; 
         }
 
+
         private string GetConnString()
         {
 
@@ -25,6 +26,8 @@ namespace BSEB_API2026.Services
             return cs;
         }
 
+
+
         public async Task<IEnumerable<FacultyDto>> GetFacultiesAsync()
         {
             var faculties = new List<FacultyDto>();
@@ -32,6 +35,7 @@ namespace BSEB_API2026.Services
             await conn.OpenAsync();
 
             const string sql = @"SELECT Pk_FacultyId, FacultyName FROM dbo.Faculty_Mst";
+
 
             using var cmd = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
 
@@ -107,12 +111,7 @@ ORDER BY stu.Pk_StudentId DESC;
                     FacultyName = reader["FacultyName"]?.ToString(),
                     ExamTypeId = reader["ExamTypeId"]?.ToString(),
 
-                    //CollegeId = reader["CollegeId"]?.ToString(),
-                    //CollegeName = reader["CollegeName"]?.ToString(),
-                    //FacultyId = reader["FacultyId"]?.ToString(),
-
-                    //FacultyName = reader["FacultyName"]?.ToString(),
-                    //ExamTypeId = reader["ExamTypeId"]?.ToString(),
+                   
                     IsRegCardUploaded = reader["IsRegCardUploaded"] is not DBNull &&
                                      Convert.ToBoolean(reader["IsRegCardUploaded"])
 
