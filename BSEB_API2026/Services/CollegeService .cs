@@ -31,6 +31,17 @@ namespace CollegeSeatAPI.Services
             switch (mode)
             {
 
+                //case "ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Regular";
+                //    break;
+
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -55,9 +66,6 @@ namespace CollegeSeatAPI.Services
                         nameof(regMode));
             }
 
-
-            //    
-
             var rows = await _db.Set<GetStudentRegiListData>()
               .FromSqlInterpolated($@"
                     EXEC dbo.sp_GetStudentRegiListData 
@@ -70,9 +78,6 @@ namespace CollegeSeatAPI.Services
             return rows;
 
         }
-
-
-
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
