@@ -28,6 +28,8 @@ namespace CollegeSeatAPI.Services
                     "regMode is required and must be one of: ofss, non-ofss, display-registered.",
                     nameof(regMode));      
 
+
+
             var mode = regMode.Trim().ToLowerInvariant();
 
 
@@ -38,19 +40,7 @@ namespace CollegeSeatAPI.Services
                         categoryType = "Regular";
                     break;
 
-                //case "non-ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Private";
-                //    break;
-
-                //case "display-registered":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        throw new ArgumentException(
-                //            "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
-                //            nameof(categoryType));
-                //    break;
-
-
+               
                 case "non-ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Private";
@@ -83,7 +73,6 @@ namespace CollegeSeatAPI.Services
 
 
         }
-
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
             return await _db.Set<FacultyDto>()
