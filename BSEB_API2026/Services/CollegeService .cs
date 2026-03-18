@@ -6,7 +6,6 @@ using System.Data;
 
 namespace CollegeSeatAPI.Services
 {
-
     public class CollegeService : IStudentRegistrationService
     {
         private readonly AppDbContext _db;
@@ -30,22 +29,8 @@ namespace CollegeSeatAPI.Services
 
             var mode = regMode.Trim().ToLowerInvariant();
 
-
-
             switch (mode)
             {
-
-                //case "ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Regular";
-                //    break;
-
-
-                //case "non-ofss":
-                //    if (string.IsNullOrWhiteSpace(categoryType))
-                //        categoryType = "Private";
-                //    break;
-
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
@@ -65,14 +50,12 @@ namespace CollegeSeatAPI.Services
                             nameof(categoryType));
                     break;
 
-
                 default:
 
                     throw new ArgumentException(
                         "regMode must be one of: ofss, non-ofss, display-registered.",
                         nameof(regMode));
             }
-
 
 
             var rows = await _db.Set<GetStudentRegiListData>()
@@ -88,8 +71,6 @@ namespace CollegeSeatAPI.Services
 
 
         }
-
-
 
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
