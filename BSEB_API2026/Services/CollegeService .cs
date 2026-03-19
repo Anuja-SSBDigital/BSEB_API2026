@@ -10,10 +10,13 @@ namespace CollegeSeatAPI.Services
     {
         private readonly AppDbContext _db;
 
+
         public CollegeService(AppDbContext db)
         {
             _db = db;
         } 
+
+
 
         public async Task<IEnumerable<GetStudentRegiListData>> GetStudentsAsync(
             int collegeId,
@@ -22,6 +25,8 @@ namespace CollegeSeatAPI.Services
             string? categoryType,           
             string? studentName)   
         {
+
+
             if (string.IsNullOrWhiteSpace(regMode))
                 throw new ArgumentException(
                     "regMode is required and must be one of: ofss, non-ofss, display-registered.",
@@ -29,12 +34,28 @@ namespace CollegeSeatAPI.Services
 
             var mode = regMode.Trim().ToLowerInvariant();
 
+
+
             switch (mode)
             {
                 case "ofss":
                     if (string.IsNullOrWhiteSpace(categoryType))
                         categoryType = "Regular";
                     break;
+
+
+                //case "non-ofss":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        categoryType = "Private";
+                //    break;
+
+
+                //case "display-registered":
+                //    if (string.IsNullOrWhiteSpace(categoryType))
+                //        throw new ArgumentException(
+                //            "For regMode=display-registered, categoryType is required (e.g., 'Regular' or 'Private').",
+                //            nameof(categoryType));
+                //    break;
 
 
                 case "non-ofss":
@@ -71,6 +92,7 @@ namespace CollegeSeatAPI.Services
 
 
         }
+
 
         public async Task<IEnumerable<FacultyDto>> GetFacultyDropdownAsync()
         {
